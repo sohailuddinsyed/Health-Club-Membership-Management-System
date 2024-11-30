@@ -1,7 +1,7 @@
 ## Compile and Run:
 
 - Navigate to the root project directory in the terminal.
-- Navigate to the root project directory in the terminal and Compile the entire project:
+- Compile the entire project:
 ```shell
 javac main/Main.java -d out
 ```
