@@ -10,11 +10,12 @@ public class Member {
     private String membershipType;
     private String startDate;
     private String endDate;
-    private String password; // Password for login
-    private ArrayList<LocalDate> visitLog; // To track visits
+    private String password;
+    private ArrayList<LocalDate> visitLog; // Tracks visits
 
     // Constructor
-    public Member(String memberId, String name, String email, String membershipType, String startDate, String endDate, String password) {
+    public Member(String memberId, String name, String email, String membershipType,
+                  String startDate, String endDate, String password) {
         this.memberId = memberId;
         this.name = name;
         this.email = email;
@@ -26,34 +27,14 @@ public class Member {
     }
 
     // Getters and setters
-    public String getMemberId() {
-        return memberId;
-    }
+    public String getMemberId() { return memberId; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
+    public String getEndDate() { return endDate; }
+    public String getPassword() { return password; }
+    public String getMembershipType() {return membershipType; }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    // Login method
-    public boolean login(String email, String password) {
-        return this.email.equals(email) && this.password.equals(password);
-    }
+    public void setPassword(String password) { this.password = password; }
 
     // Record a visit
     public void recordVisit() {
@@ -65,8 +46,13 @@ public class Member {
         return visitLog.size();
     }
 
-    // Get visit log (for debugging or reporting)
+    // Get visit log
     public ArrayList<LocalDate> getVisitLog() {
         return visitLog;
+    }
+
+    // Login validation
+    public boolean login(String email, String password) {
+        return this.email.equals(email) && this.password.equals(password);
     }
 }

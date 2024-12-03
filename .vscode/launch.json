@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "HealthClubUI",
+            "request": "launch",
+            "mainClass": "main.HealthClubUI",
+            "projectName": "Health Club Membership Management System_f2af6a6c"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "App",

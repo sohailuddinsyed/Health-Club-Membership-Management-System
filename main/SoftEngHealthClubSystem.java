@@ -1,4 +1,3 @@
-// main/SoftEngHealthClubSystem.java
 package main;
 
 import java.util.ArrayList;
@@ -8,8 +7,8 @@ import models.Member;
 
 public class SoftEngHealthClubSystem {
     private static final ArrayList<Member> members = new ArrayList<>();
-    static final ArrayList<Employee> employees = new ArrayList<>();
-    static final ArrayList<Manager> managers = new ArrayList<>();
+    private static final ArrayList<Employee> employees = new ArrayList<>();
+    private static final ArrayList<Manager> managers = new ArrayList<>();
 
     // Initialize some dummy data
     static {
@@ -24,26 +23,65 @@ public class SoftEngHealthClubSystem {
         managers.add(new Manager("m001", "Bob", "bob@softeng.com", "manager123", "Manager"));
     }
 
-    // Add member
+    // Add a new member
+    // Add a new member with password
     public static void addMember(Member member) {
+        if (getMemberById(member.getMemberId()) != null) {
+            System.out.println("Member with ID " + member.getMemberId() + " already exists.");
+            return;
+        }
+        if (member.getPassword() == null || member.getPassword().isEmpty()) {
+            System.out.println("Password cannot be empty.");
+            return;
+        }
         members.add(member);
         System.out.println("Member added successfully: " + member.getName());
     }
 
-    // Remove member
+
+    // Remove a member by ID
     public static boolean removeMember(String memberId) {
         return members.removeIf(member -> member.getMemberId().equals(memberId));
     }
 
-    // Add employee
+    // Get a member by ID
+    public static Member getMemberById(String memberId) {
+        return members.stream().filter(member -> member.getMemberId().equals(memberId)).findFirst().orElse(null);
+    }
+
+    // Add a new employee
     public static void addEmployee(Employee employee) {
+        if (getEmployeeByUsername(employee.getUsername()) != null) {
+            System.out.println("Employee with username " + employee.getUsername() + " already exists.");
+            return;
+        }
         employees.add(employee);
         System.out.println("Employee added successfully: " + employee.getUsername());
     }
 
-    // Remove employee
+    // Remove an employee by username
     public static boolean removeEmployee(String employeeId) {
         return employees.removeIf(employee -> employee.getUsername().equals(employeeId));
+    }
+
+    // Get an employee by username
+    public static Employee getEmployeeByUsername(String username) {
+        return employees.stream().filter(employee -> employee.getUsername().equals(username)).findFirst().orElse(null);
+    }
+
+    // Add a new manager
+    public static void addManager(Manager manager) {
+        if (getManagerByUsername(manager.getUsername()) != null) {
+            System.out.println("Manager with username " + manager.getUsername() + " already exists.");
+            return;
+        }
+        managers.add(manager);
+        System.out.println("Manager added successfully: " + manager.getUsername());
+    }
+
+    // Get a manager by username
+    public static Manager getManagerByUsername(String username) {
+        return managers.stream().filter(manager -> manager.getUsername().equals(username)).findFirst().orElse(null);
     }
 
     // List all members
@@ -61,6 +99,16 @@ public class SoftEngHealthClubSystem {
             System.out.println("- " + employee.getUsername() + ": " + employee.getEmail());
         }
     }
+
+    // List all managers
+    public static void listManagers() {
+        System.out.println("Managers:");
+        for (Manager manager : managers) {
+            System.out.println("- " + manager.getUsername() + ": " + manager.getEmail());
+        }
+    }
+
+    // Getters for collections
     public static ArrayList<Member> getMembers() {
         return members;
     }
@@ -72,5 +120,4 @@ public class SoftEngHealthClubSystem {
     public static ArrayList<Manager> getManagers() {
         return managers;
     }
-
 }
